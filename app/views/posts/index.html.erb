@@ -1,0 +1,19 @@
+<p style="color: green"><%= notice %></p>
+
+<h1 style="text-align: center; font-weight: bold;font-size: 50px;font-family: sans-serif;color: #757567">Posts</h1>
+
+<div class="row" id="posts">
+  <% @posts.each do |post| %>
+  <div class="col-sm-3 mt-4">
+    <div class="card" style="background-color:#efebeb">
+      <div class="card-body">
+        <h5 class="card-title"><%= render post %></h5>
+        <a href="<%= post_path(post) %>" class="btn btn-primary" style="background-color: #555d68">Show this post</a>
+      </div>
+    </div>
+  </div>  
+  <% end %>
+</div>
+<div class="mt-4">
+  <%= link_to "Create New Post", new_post_path, class: "btn btn-info" %>
+</div>

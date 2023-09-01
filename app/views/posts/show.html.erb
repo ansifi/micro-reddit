@@ -1,0 +1,42 @@
+<div class="container">
+<p class="notice" style="color: green"><%= notice %></p>
+
+<div class="card" style="width: 18rem;background-color:#efebeb;text-align:center">
+  <div class="card-body">
+    <h5 class="card-title"><%= @post.title %></h5>
+    <p class="card-text"></p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><%= @post.body %></li>
+    <%# <li class="list-group-item">A second item</li>
+    <li class="list-group-item">A third item</li> %>
+  </ul>
+  <div class="card-body">
+    <a href="<%= edit_post_path(@post) %>" class="card-link">Edit this post</a>
+    <a href="<%= post_path(@post) %>" class="card-link">Back to posts</a>
+    <%= button_to "Destroy this post", @post, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+  </div>
+</div>
+
+
+<h2>Comments</h2>
+<% @post.comments.each do |comment| %>
+  <div class="card mb-3" style="width: 18rem;background-color:#8d8787">
+    <div class="card-body">
+      <h5 class="card-title"><strong><%= comment.user.email %>:</strong></h5>
+      <p class="card-text"><%= comment.body %></p>
+      <% if comment.user == current_user %>
+        <div class="comment-actions">
+          <%= link_to "Edit Comment", edit_comment_path(comment), class: "btn btn-sm btn-primary" %>
+          <%= link_to "Delete Comment", comment, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<h2>Add a Comment</h2>
+<div style="width: 18rem;background-color:#c4bbbb;">
+  <%= render "comments/form", comment: @comment %>
+</div>
+</div>
